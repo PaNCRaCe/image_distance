@@ -6,8 +6,8 @@ import numpy as np
 from skimage import draw
 import matplotlib.pyplot as plt
 
-def distance_pt(pt, grid_y, grid_x):
-    return np.sqrt((grid_y - pt[0]) ** 2 + (grid_x - pt[1]) ** 2)
+def _sqr_distance_pt(pt, grid_y, grid_x):
+    return (grid_y - pt[0]) ** 2 + (grid_x - pt[1]) ** 2
 
 def distance_segment(pt0, pt1, image_shape):
     i_rows, i_cols = draw.line(pt0[1], pt0[0], pt1[1], pt1[0])
@@ -16,10 +16,10 @@ def distance_segment(pt0, pt1, image_shape):
     grid_y, grid_x = np.mgrid[0:height, 0:width]
     
     for pt in zip(i_rows, i_cols):
-        image_dist = distance_pt(pt, grid_y, grid_x)
+        image_dist = _sqr_distance_pt(pt, grid_y, grid_x)
         resultat[resultat > image_dist] = image_dist[resultat > image_dist]
     
-    return resultat
+    return np.sqrt(resultat)
 
 if __name__ == "__main__":
     
