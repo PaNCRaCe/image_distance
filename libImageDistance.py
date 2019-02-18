@@ -4,7 +4,6 @@ Calcul d'une image renvoyant pour chaque pixel la distance à un segment
 
 import numpy as np
 from skimage import draw
-import matplotlib.pyplot as plt
 
 
 def _sqr_distance_pt(pt, grid_y, grid_x):
@@ -37,18 +36,3 @@ def distance_segment(pt0, pt1, image_shape):
         resultat[resultat > image_dist] = image_dist[resultat > image_dist]
 
     return np.sqrt(resultat)
-
-
-if __name__ == "__main__":
-
-    I_shape = (50, 100)
-    segment_0 = (60, 5)
-    segment_1 = (20, 40)
-    resultat = distance_segment(segment_0, segment_1, I_shape)
-
-    plt.figure()
-    plt.imshow(resultat)
-    plt.colorbar()
-    plt.title("distance au segment %s - %s" % (segment_0, segment_1))
-    plt.show()
-
