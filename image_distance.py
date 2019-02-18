@@ -27,8 +27,11 @@ def distance_segment(pt0, pt1, image_shape):
     i_rows, i_cols = draw.line(pt0[1], pt0[0], pt1[1], pt1[0])
     resultat = np.full(image_shape, np.inf)
     height, width = image_shape
+
+    # images des abcisses et ordonnées
     grid_y, grid_x = np.mgrid[0:height, 0:width]
 
+    # pour chaque pt du segment, calcul des distances et de la distance minimale
     for pt in zip(i_rows, i_cols):
         image_dist = _sqr_distance_pt(pt, grid_y, grid_x)
         resultat[resultat > image_dist] = image_dist[resultat > image_dist]
