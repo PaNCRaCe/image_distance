@@ -18,8 +18,8 @@ def distance_segment(pt0, pt1, image_shape):
     """
 
     i_rows, i_cols = draw.line(pt0[1], pt0[0], pt1[1], pt1[0])
-    resultat = np.full((50, 100), np.inf)
-    height, width = resultat.shape
+    resultat = np.full(image_shape, np.inf)
+    height, width = image_shape
     grid_y, grid_x = np.mgrid[0:height, 0:width]
     
     for pt in zip(i_rows, i_cols):
