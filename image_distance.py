@@ -1,5 +1,5 @@
 """
-Calcul d'une image renvoyant pour chaque pixel la distance à une ligne
+Calcul d'une image renvoyant pour chaque pixel la distance à un segment
 """
 
 import numpy as np
@@ -7,9 +7,16 @@ from skimage import draw
 import matplotlib.pyplot as plt
 
 def _sqr_distance_pt(pt, grid_y, grid_x):
+    """
+    calcul du carré de la distance à un point pour chaque pixel
+    """
     return (grid_y - pt[0]) ** 2 + (grid_x - pt[1]) ** 2
 
 def distance_segment(pt0, pt1, image_shape):
+    """
+    calcul de la distance minimale (en pixels) de chaque pixel de l'image à un segment
+    """
+
     i_rows, i_cols = draw.line(pt0[1], pt0[0], pt1[1], pt1[0])
     resultat = np.full((50, 100), np.inf)
     height, width = resultat.shape
