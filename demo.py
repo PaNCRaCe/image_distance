@@ -1,5 +1,5 @@
 """
-Demo de  libImagedistance.py
+Demo de libImagedistance.py
 """
 
 import matplotlib.pyplot as plt
@@ -14,9 +14,10 @@ def _convert_8bits(img):
     Convertit le résultat en array uint8 avec des valeurs
     comprises entre 0 et 255
     """
-    res_8b = np_round(resultat).astype(np_uint8)
+    res_8b = np_round(resultat)    
     res_8b[res_8b > 255] = 255
-    return res_8b
+    return res_8b.astype(np_uint8)
+
 
 
 if __name__ == "__main__":
