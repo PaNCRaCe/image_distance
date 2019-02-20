@@ -8,6 +8,17 @@ from numpy import uint8 as np_uint8
 from numpy import round as np_round
 from libImageDistance import distance_segment
 
+
+def _convert_8bits(img):
+    """
+    Convertit le résultat en array uint8 avec des valeurs
+    comprises entre 0 et 255
+    """
+    res_8b = np_round(resultat).astype(np_uint8)
+    res_8b[res_8b > 255] = 255
+    return res_8b
+
+
 if __name__ == "__main__":
 
     I_shape = (50, 100)
@@ -23,9 +34,5 @@ if __name__ == "__main__":
     plt.show()
 
     # enregistrement du résultat en images 8 et 16 bits
-    img_16b = Image.fromarray(resultat)
-    img_16b.save("distance_16b.tif")
-    res_8b = np_round(resultat).astype(np_uint8)
-    res_8b[res_8b > 255] = 255
-    img_8b = Image.fromarray(res_8b)
-    img_8b.save("distance_8b.tif")
+    Image.fromarray(resultat).save("distance_16b.tif")
+    Image.fromarray(_convert_8bits(resultat)).save("distance_8b.tif")
